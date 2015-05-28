@@ -17,8 +17,8 @@ class InfluxDBClient(object):
 
         self._create_database(database)
 
-    def write_points(self, name, **kwargs):
-        self._client.write_points([{
+    def write_point(self, name, **kwargs):
+        self._client.write_point([{
             "name": name,
             "columns": kwargs.keys(),
             "points": [

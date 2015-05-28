@@ -17,12 +17,12 @@ with describe('Influxdb Client'):
     with after.each:
         self.client.drop_database(DATABASE)
 
-    with describe('write points'):
+    with describe('write point'):
         with it('writes points in database'):
             a_value = random.getrandbits(10)
             another_value = random.getrandbits(10)
 
-            self.client.write_points('test', a=a_value, b=another_value)
+            self.client.write_point('test', a=a_value, b=another_value)
 
             point = self.client.query('select * from test limit 1')[0]['points'][0]
 
@@ -38,4 +38,4 @@ with describe('Influxdb Client'):
             with it('deletes database'):
                 self.client.drop_database(DATABASE)
 
-                expect(lambda: self.client.write_points('test', a=1, b=2)).to(raise_error)
+                expect(lambda: self.client.write_point('test', a=1, b=2)).to(raise_error)
