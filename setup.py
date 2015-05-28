@@ -6,5 +6,6 @@ setup(
     author='Bifer Team',
     description='Base python infrastructure to work with influxdb',
     platforms='Linux',
+    install_requires=[line for line in open('requirements.txt')],
     packages=find_packages(exclude=['ez_setup', 'specs', 'tests', 'integration_specs'])
 )
