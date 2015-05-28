@@ -33,7 +33,7 @@ with describe('Influxdb Client'):
             a_value = random.getrandbits(10)
             another_value = random.getrandbits(10)
 
-            self.client.write_points('test', {'value': a_value}, {'value': another_value})
+            self.client.write_points('test', [{'value': a_value}, {'value': another_value}])
 
             points = self.client.query('select * from test limit 2')[0]['points']
 
