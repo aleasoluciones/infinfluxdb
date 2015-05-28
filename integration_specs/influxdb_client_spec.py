@@ -18,7 +18,7 @@ with describe('Influxdb Client'):
         self.client.drop_database(DATABASE)
 
     with describe('write point'):
-        with it('writes points in database'):
+        with it('writes point in database'):
             a_value = random.getrandbits(10)
             another_value = random.getrandbits(10)
 
@@ -27,6 +27,17 @@ with describe('Influxdb Client'):
             point = self.client.query('select * from test limit 1')[0]['points'][0]
 
             expect(point).to(contain(a_value, another_value))
+
+    with describe('write points'):
+        with it('writes points in database'):
+            a_value = random.getrandbits(10)
+            another_value = random.getrandbits(10)
+
+            self.client.write_points('test', {'value': a_value}, {'value': another_value})
+
+            points = self.client.query('select * from test limit 2')[0]['points']
+
+            expect(points).to(contain(end_with(another_value), end_with(a_value)))
 
     with describe('drop database'):
         with context('when database does not exist'):
