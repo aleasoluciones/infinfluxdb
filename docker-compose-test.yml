@@ -1,0 +1,17 @@
+tests:
+  build: .
+  command: integration-tests
+  links:
+    - influxdb:influxdb
+  environment:
+    - INFLUXDB_HOST=influxdb
+    - INFLUXDB_PORT=8086
+    - INFLUXDB_USERNAME=root
+    - INFLUXDB_PASSWORD=root
+    - INFLUXDB_DATABASE=infinfluxdb-test
+    - INFLUXDB_SSL=false
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+
+influxdb:
+  image: tutum/influxdb:0.8.8
