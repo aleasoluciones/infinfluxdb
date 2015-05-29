@@ -39,6 +39,9 @@ with describe('Influxdb Client'):
 
             expect(points).to(contain(end_with(another_value), end_with(a_value)))
 
+        with it('does not write anything if empty points list'):
+            self.client.write_points('test', [])
+
     with describe('drop database'):
         with context('when database does not exist'):
             with it('does nothing'):

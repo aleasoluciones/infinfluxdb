@@ -27,6 +27,9 @@ class InfluxDBClient(object):
         }])
 
     def write_points(self, name, args):
+        if len(args) == 0:
+            return
+
         columns = args[0].keys()
         points = [p.values() for p in args]
         self._client.write_points([{
